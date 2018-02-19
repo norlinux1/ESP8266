@@ -31,8 +31,8 @@
 const uint8_t Arranque[] PROGMEM="ESP8266 DEMO ...\0";
 char msgBox[18]={};
 /* Wifi access point ussid and password (to connect to) */
-char* USSID = "MEO-Carvalho";
-char* PASSWORD = "warkaput";
+char* USSID = "NAME-USSID";
+char* PASSWORD = "pass-USSID";
 /* ESP working structure and result enumeration */
 ESP_Result espResp;
 int main(void)
