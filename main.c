@@ -54,15 +54,45 @@ int main(void)
 			} 
 			else {sprintf(msgBox,"ESP INIT ERR:%d",espResp);
 			LCDprintXY(msgBox,0,0);
-			Wait();
-			}			if ((espResp =ESP_WIFIMode(ESP_Mode_STA,Single))== espOK)			{				LCDprintXY("STATION OK...",0,0); Wait();				}			else {sprintf(msgBox,"STATION ERRO:%d",espResp);
+			Wait();
+
+			}
+			if ((espResp =ESP_WIFIMode(ESP_Mode_STA,Single))== espOK)
+			{
+				LCDprintXY("STATION OK...",0,0); Wait();	
+			}
+			else {sprintf(msgBox,"STATION ERRO:%d",espResp);
 				LCDprintXY(msgBox,0,0);
-				Wait();				}						if (ESP_WIFIConnect(USSID,PASSWORD)==espOK)				{					sprintf(msgBox,"WIFI %s",USSID);					LCDprintXY(msgBox,0,0);					Wait();					}else{							LCDprintXY("ERRO WIFI RESET",0,0);							Wait();							if (ESP_Restart()==espOK)
+				Wait();	
+			}
+			
+			if (ESP_WIFIConnect(USSID,PASSWORD)==espOK)
+				{
+					sprintf(msgBox,"WIFI %s",USSID);
+					LCDprintXY(msgBox,0,0);
+					Wait();
+					}else{
+							LCDprintXY("ERRO WIFI RESET",0,0);
+							Wait();
+							if (ESP_Restart()==espOK)
 							{
-								sprintf(msgBox,"WIFI %s",USSID);								LCDprintXY(msgBox,0,0);								Wait();
+								sprintf(msgBox,"WIFI %s",USSID);
+								LCDprintXY(msgBox,0,0);
+								Wait();
 							}else{
 							loop:
-							LCDprintXY("SOMETHING WRONG...",0,0);							Wait();							LCDprintXY("REMOVE ESP8266...",0,0);							Wait();							LCDprintXY("CHECK USSID....",0,0);							Wait();							LCDprintXY("CHECK PASSWORD..",0,0);							Wait();							goto loop;							}						}
+							LCDprintXY("SOMETHING WRONG...",0,0);
+							Wait();
+							LCDprintXY("REMOVE ESP8266...",0,0);
+							Wait();
+							LCDprintXY("CHECK USSID....",0,0);
+							Wait();
+							LCDprintXY("CHECK PASSWORD..",0,0);
+							Wait();
+							goto loop;
+							}
+						}
+
 	
     while (1) 
     {
@@ -76,7 +106,7 @@ int main(void)
 		    Energia=1+(rand() % 30); // For aleatory numbers
 		if (WIFI_Client_Connection("TCP", "maquina.96.lt", 80)==espOK)
 		{
-			sprintf(msgData,"GET /gravar.php?man=%d&energia=%d HTTP/1.1\r\nHost: maquina.96.lt\r\n%s",Manobras,Energia,hostString);
+			sprintf(msgData,"GET /gravar.php?man=%d&energy=%d HTTP/1.1\r\nHost: maquina.96.lt\r\n%s",Manobras,Energia,hostString);
 			WIFI_Send(msgData);
 		}
 		else
